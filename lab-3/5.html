@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function authenticate()
+        {
+            var balance=23500;
+            var username=document.getElementById("name").value;
+            var password= document.getElementById("pass").value;
+            var res=document.getElementById("result")
+            if(username=="amar" && password=="1234")
+            {
+                alert("login success")
+                res.innerHTML="<p>Welcome "+username+"</p>";
+                var bal=document.getElementById("balance")
+                bal.innerHTML="<p>Balance: "+balance+"</p>";
+
+            }
+            else
+            {
+                alert("Invalid Username or Password");
+            }
+        }
+    </script>
+    <style>
+        .na{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+        <label for="name">username</label>
+        <input type="text" placeholder="enter the username" id="name" name="name"><br>
+        <label for="pass">password</label>
+        <input type="password" placeholder="enter the password" id="pass" name="pass"><br>
+        <button onclick="authenticate()"> login</button>
+        <div id="result">
+        </div>
+        <DIV id="balance"></DIV>
+        <div id ="deposit">
+            <label for="select">        select</label>
+            <select name="none" id="sel">
+                <option value="withdrawl">withdrawl</option>
+                <option value="deposit">deposit</option>
+            </select>
+        </div>
+</body>
+</html>
