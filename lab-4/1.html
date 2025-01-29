@@ -1,0 +1,36 @@
+<!-- use fetch function to access remote data using the given api and display the data in the form of a table . -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <h1>Weather details of hyderabad</h1>
+    <button onclick="displayData()">Show</button>
+   <div id="result"></div>
+    <div id="humi"></div>
+    <div id="min"></div>
+    <div id="max"></div>
+    <div></div>
+
+
+   <script>
+    async function displayData() {
+         let data=await fetch("https://api.openweathermap.org/data/2.5/weather?q=hyderabad&appid=a7d8a57e2d29cf0f48b401c0bd2a0b99")
+        .then(response => response.json())
+    let res=document.getElementById("result")
+    let humi=document.getElementById("humi")
+    let min=document.getElementById("min")
+    let max=document.getElementById("max")
+    res.innerHTML=`<h1>Name:${data.name}<h1>`
+    humi.innerHTML=`<h1>Humidity:${data.main.humidity}<h1>`
+    min.innerHTML=`<h1>Min Temparature:${data.main.temp_min}<h1>`
+    max.innerHTML=`<h1>Max Temparature:${data.main.temp_max}<h1>`
+     }
+     
+ </script>
+</body>
+</html>

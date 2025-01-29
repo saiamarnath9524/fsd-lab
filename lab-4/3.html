@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <label for="city">Enter city name:</label>
+    <input type="text" id="city" name="city" placeholder="Enter city name">
+    <button onclick="displayData()">Show</button>
+    <table border="1px solid black" style="text-align: center;">
+        <tr>
+            <td style="font-size: 40px;">
+                name
+            </td>
+            <td id="result">
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 40px;">
+                humidity
+            </td>
+            <td id="humi">
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 40px;">
+               min temp
+            </td>
+            <td id="min">
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 40px;">
+                max temp
+            </td>
+            <td id="max">
+            </td>
+        </tr>
+
+    </table>
+   <script>
+    async function displayData() {
+        let city = document.getElementById("city").value;
+        let key=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a7d8a57e2d29cf0f48b401c0bd2a0b99`
+         let data=await fetch(key)
+        .then(response => response.json())
+    let res=document.getElementById("result")
+    let humi=document.getElementById("humi")
+    let min=document.getElementById("min")
+    let max=document.getElementById("max")
+    res.innerHTML=`<h1>${data.name}<h1>`
+    humi.innerHTML=`<h1>${data.main.humidity}<h1>`
+    min.innerHTML=`<h1>${data.main.temp_min}<h1>`
+    max.innerHTML=`<h1>${data.main.temp_max}<h1>`
+        console.log(data)
+     }
+     
+ </script>
+</body>
+</html>

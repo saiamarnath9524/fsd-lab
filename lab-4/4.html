@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <label for="city">Enter city name:</label>
+    <input type="text" id="city" name="city" placeholder="Enter city name">
+    <button onclick="displayData()">Show</button>
+    <div id="container">
+        <div id="bar Chart"></div>
+    </div>
+   <script>
+    async function displayData() {
+        let city = document.getElementById("city").value;
+        let key=`https://api.openweathermap.org/data/2.5/forecast?q={city}&appid=a7d8a57e2d29cf0f48b401c0bd2a0b99`
+         let data=await fetch(key)
+        .then(response => response.json())
+        .then(data => data.list)
+        const weatherData = data.map(item => {
+            return {
+                date: item.dt_txt,
+                temperature: item.main.temp,
+                humidity: item.main.humidity
+                }
+                });
+                const barChart = new Chart(document.getElementById("bar Chart"), {
+                    type: 'bar',
+                    data: {
+                        labels: weatherData.map(item => item.date),
+                        datasets: [
+                            {
+                                label: 'Temperature',
+                                data: weatherData.map(item => item.temperature),
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1
+                                },
+                                {
+                                    label: 'Humidity',
+                                    data: weatherData.map(item => item.humidity),
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
+                                    }
+                                    ]
+                                    },
+                                    options: {
+                                        title: {
+                                            display: true,
+                                            text: 'Weather Data'
+                                            },
+                                            scales: {
+                                                yAxes: [{
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        labelString: 'Temperature/Humidity'
+                                                        }
+                                                        }],
+                                                        xAxes: [{
+                                                            scaleLabel: {
+                                                                display: true,
+                                                                labelString: 'Date'
+                                                                }
+                                                                }]
+                                                                }
+                                                                });
+                                                                
+     }
+     
+ </script>
+</body>
+</html>
